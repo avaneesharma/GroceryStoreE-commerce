@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Food Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body>
+  <header class="admin-header">
+    <div class="admin-logo">
+      <img src="/images/logo.png" alt="Food Mart Grocery Store" />
+      <span>Admin</span>
+    </div>
+    
+    <div class="admin-user">
+      <span>Welcome, Admin</span>
+      <button id="admin-logout" class="admin-logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-dashboard">
+      <h1>Orders Dashboard</h1>
+      
+      <!-- Filter by date range -->
+      <div class="admin-filters">
+        <form id="date-filter-form" class="admin-filter-form">
+          <div class="filter-group">
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" name="startDate" value="<%= filters.startDate || '' %>">
+          </div>
+          
+          <div class="filter-group">
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date" name="endDate" value="<%= filters.endDate || '' %>">
+          </div>
+          
+          <div class="filter-actions">
+            <button type="submit" class="admin-btn">Filter</button>
+            <button type="button" id="reset-filter" class="admin-btn outline">Reset</button>
+          </div>
+        </form>
+        
+        <!-- Export data -->
+        <div class="admin-export">
+          <button onclick="exportOrders()" class="admin-btn">
+            <i class="fas fa-file-export"></i> Export CSV
+          </button>
+        </div>
+      </div>
+      
+      <!-- Orders summary -->
+      <div class="admin-summary">
+        <div class="summary-card">
+          <div class="summary-title">Total Orders</div>
+          <div class="summary-value"><%= summary.totalOrders %></div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-title">Total Revenue</div>
+          <div class="summary-value">$<%= summary.totalRevenue.toFixed(2) %></div>
+        </div>
+        
+        <div class="summary-card">
+          <div class="summary-title">Avg. Order Value</div>
+          <div class="summary-value">$<%= summary.avgOrderValue.toFixed(2) %></div>
+        </div>
+      </div>
+      
+      <!-- Orders table -->
+      <div class="admin-orders">
+        <h2>Orders</h2>
+        
+        <% if (orders && orders.length > 0) { %>
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% orders.forEach(order => { %>
+                  <tr>
+                    <td>#<%= order.id %></td>
+                    <td>
+                      <div><%= order.customer_name %></div>
+                      <div class="email"><%= order.email %></div>
+                    </td>
+                    <td><%= new Date(order.created_at).toLocaleDateString() %></td>
+                    <td><%= order.itemCount %> items</td>
+                    <td>$<%= order.total.toFixed(2) %></td>
+                    <td>
+                      <button class="order-toggle" data-order-id="<%= order.id %>">
+                        View Details &darr;
+                      </button>
+                    </td>
+                  </tr>
+                  <tr id="order-details-<%= order.id %>" class="order-details-row" style="display: none;">
+                    <td colspan="6">
+                      <div class="order-details-container">
+                        <div class="order-details-section">
+                          <h3>Customer Details</h3>
+                          <div class="detail-item">
+                            <span>Name:</span>
+                            <strong><%= order.customer_name %></strong>
+                          </div>
+                          <div class="detail-item">
+                            <span>Email:</span>
+                            <strong><%= order.email %></strong>
+                          </div>
+                          <div class="detail-item">
+                            <span>Mobile:</span>
+                            <strong><%= order.mobile %></strong>
+                          </div>
+                          <div class="detail-item">
+                            <span>Address:</span>
+                            <strong><%= order.address %></strong>
+                          </div>
+                        </div>
+                        
+                        <div class="order-details-section">
+                          <h3>Order Items</h3>
+                          <table class="order-items-table">
+                            <thead>
+                              <tr>
+                                <th>Item</th>
+                                <th>Unit</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Subtotal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% order.items.forEach(item => { %>
+                                <tr>
+                                  <td><%= item.name %></td>
+                                  <td><%= item.unit %></td>
+                                  <td>$<%= item.price.toFixed(2) %></td>
+                                  <td><%= item.quantity %></td>
+                                  <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
+                                </tr>
+                              <% }); %>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <td colspan="4" align="right"><strong>Total:</strong></td>
+                                <td><strong>$<%= order.total.toFixed(2) %></strong></td>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <div class="admin-no-data">
+            <p>No orders found for the selected date range.</p>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </main>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

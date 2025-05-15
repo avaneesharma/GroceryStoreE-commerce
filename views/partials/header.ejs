@@ -1,0 +1,72 @@
+<!-- views/partials/header.ejs -->
+<header>
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="Food Mart Grocery Store" /></a>
+    </div>
+    <div class="search-box">
+      <form action="/search" method="GET">
+        <input type="text" name="q" placeholder="Search for groceries..." required />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div class="cart-button">
+      <button>
+        <i class="fas fa-shopping-cart"></i> Cart 
+        <span class="cart-count"><%= typeof cartCount !== 'undefined' ? cartCount : 0 %></span>
+      </button>
+    </div>
+  </header>
+  
+  <div class="navbar">
+    <a href="/">Home</a>
+    
+    <div class="subnav">
+      <button class="subnavbtn">Frozen <i class="fas fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="/category/frozen-vegetables" data-category="frozen-vegetables">Frozen Vegetables</a>
+        <a href="/category/frozen-meat" data-category="frozen-meat">Frozen Meat</a>
+      </div>
+    </div>
+    
+    <div class="subnav">
+      <button class="subnavbtn">Fresh <i class="fas fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="/category/fresh-fruits" data-category="fresh-fruits">Fresh Fruits</a>
+        <a href="/category/fresh-vegetables" data-category="fresh-vegetables">Fresh Vegetables</a>
+      </div>
+    </div>
+    
+    <div class="subnav">
+      <button class="subnavbtn">Dairy <i class="fas fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="/category/dairy-liquid" data-category="dairy-liquid">Liquid</a>
+        <a href="/category/dairy-cheese" data-category="dairy-cheese">Cheese</a>
+        <a href="/category/dairy-frozen" data-category="dairy-frozen">Frozen</a>
+        <a href="/category/dairy-cream" data-category="dairy-cream">Cream</a>
+      </div>
+    </div>
+    
+    <div class="subnav">
+      <button class="subnavbtn">Beverages <i class="fas fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="/category/beverages-soft-drinks" data-category="beverages-soft-drinks">Soft Drinks</a>
+        <a href="/category/beverages-juices" data-category="beverages-juices">Juices</a>
+      </div>
+    </div>
+    
+    <div class="subnav">
+      <button class="subnavbtn">Home <i class="fas fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="/category/home-cleaning" data-category="home-cleaning">Cleaning Supplies</a>
+        <a href="/category/home-kitchen" data-category="home-kitchen">Kitchen Items</a>
+      </div>
+    </div>
+    
+    <div class="subnav">
+      <button class="subnavbtn">Pet Food <i class="fas fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="/category/pet-food-dog" data-category="pet-food-dog">Dog Food</a>
+        <a href="/category/pet-food-cat" data-category="pet-food-cat">Cat Food</a>
+      </div>
+    </div>
+  </div>

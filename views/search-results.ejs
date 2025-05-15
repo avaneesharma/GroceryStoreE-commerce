@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Results - Food Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <h1>Search Results for "<%= query %>"</h1>
+    
+    <section id="search-results" class="product-section">
+      <div class="item-grid">
+        <div class="grid">
+          <% if (items && items.length > 0) { %>
+            <% items.forEach(item => { %>
+              <div class="item-card" data-id="<%= item.id %>" data-category="<%= item.category %>">
+                <img src="<%= item.image %>" alt="<%= item.name %>" />
+                <h3><%= item.name %></h3>
+                <p>Unit: <%= item.unit %></p>
+                <p class="price">$<%= item.price.toFixed(2) %></p>
+                <% if (item.stock > 0) { %>
+                  <p class="in-stock">In Stock</p>
+                  <button>Add to Cart</button>
+                <% } else { %>
+                  <p class="out-of-stock">Out of Stock</p>
+                  <button class="disabled" disabled>Add to Cart</button>
+                <% } %>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <div class="no-results">
+              <p>No products found matching your search query.</p>
+              <p>Try different keywords or <a href="/">browse all products</a>.</p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

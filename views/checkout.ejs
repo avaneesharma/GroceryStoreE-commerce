@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - Food Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/checkout.css" />
+</head>
+<body>
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="Food Mart Grocery Store" /></a>
+  </div>
+
+  <main>
+    <h1>Checkout</h1>
+    
+    <div class="checkout-container">
+      <% if (cart && cart.items && cart.items.length > 0) { %>
+        <div class="checkout-grid">
+          <div class="order-summary">
+            <h2>Order Summary</h2>
+            <div class="order-items">
+              <% cart.items.forEach(item => { %>
+                <div class="order-item">
+                  <div class="order-item-details">
+                    <img src="<%= item.image %>" alt="<%= item.name %>" />
+                    <div>
+                      <h3><%= item.name %></h3>
+                      <p><%= item.unit %> × <%= item.quantity %></p>
+                    </div>
+                  </div>
+                  <div class="order-item-price">$<%= (item.price * item.quantity).toFixed(2) %></div>
+                </div>
+              <% }); %>
+            </div>
+            
+            <div class="order-total">
+              <div class="order-total-label">Total:</div>
+              <div class="order-total-amount">$<%= cart.total.toFixed(2) %></div>
+            </div>
+            
+            <div class="back-to-cart">
+              <a href="/cart"><i class="fas fa-arrow-left"></i> Back to Cart</a>
+            </div>
+          </div>
+          
+          <!-- Replace the delivery details form in checkout.ejs with this -->
+<div class="delivery-details">
+  <h2>Delivery Details</h2>
+  <form id="checkout-form">
+    <div class="form-group">
+      <label for="customerName">Full Name*</label>
+      <input type="text" id="customerName" name="customerName" placeholder="Your full name" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email*</label>
+      <input type="email" id="email" name="email" placeholder="example@email.com" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="mobile">Mobile Number* (Australian format)</label>
+      <input type="tel" id="mobile" name="mobile" placeholder="04XX XXX XXX" required>
+    </div>
+    
+    <div class="address-section">
+      <h3>Delivery Address</h3>
+      
+      <div class="form-group">
+        <label for="street">Street Address*</label>
+        <input type="text" id="street" name="street" placeholder="Street number and name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="city">City/Suburb*</label>
+        <input type="text" id="city" name="city" placeholder="City or suburb" required>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="state">State/Territory*</label>
+          <select id="state" name="state" required>
+            <option value="">Select State</option>
+            <option value="NSW">New South Wales (NSW)</option>
+            <option value="VIC">Victoria (VIC)</option>
+            <option value="QLD">Queensland (QLD)</option>
+            <option value="WA">Western Australia (WA)</option>
+            <option value="SA">South Australia (SA)</option>
+            <option value="TAS">Tasmania (TAS)</option>
+            <option value="ACT">Australian Capital Territory (ACT)</option>
+            <option value="NT">Northern Territory (NT)</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="postcode">Postcode*</label>
+          <input type="text" id="postcode" name="postcode" placeholder="Postcode" required maxlength="4" pattern="[0-9]{4}">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="deliveryNotes">Delivery Notes (Optional)</label>
+        <textarea id="deliveryNotes" name="deliveryNotes" rows="2" placeholder="Special delivery instructions (optional)"></textarea>
+      </div>
+    </div>
+    
+    <div class="stock-checking-notice">
+      <p><i class="fas fa-info-circle"></i> Item availability will be re-checked upon order placement.</p>
+    </div>
+    
+    <button type="submit" class="place-order-btn">Place Order</button>
+  </form>
+</div>
+      <% } else { %>
+        <div class="empty-cart-message">
+          <p>Your cart is empty. Please add items to your cart before proceeding to checkout.</p>
+          <a href="/" class="continue-shopping">Continue Shopping</a>
+        </div>
+      <% } %>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Error - Food Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .error-container {
+      text-align: center;
+      padding: 50px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .error-icon {
+      font-size: 5em;
+      color: #dc3545;
+      margin-bottom: 20px;
+    }
+    
+    .error-title {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .error-message {
+      margin-bottom: 30px;
+      color: #666;
+      padding: 15px;
+      background-color: #f8d7da;
+      border-radius: 4px;
+      border: 1px solid #f5c6cb;
+      color: #721c24;
+    }
+    
+    .back-home {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    
+    .back-home:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <div class="error-container">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h1 class="error-title">Something Went Wrong</h1>
+      <div class="error-message">
+        <%= error || 'An unexpected error occurred. Please try again later.' %>
+      </div>
+      <a href="/" class="back-home">Back to Homepage</a>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

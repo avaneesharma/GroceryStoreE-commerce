@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Shopping Cart - Food Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/cart.css" />
+</head>
+<body>
+  <div class="logo">
+    <a href="/"><img src="/images/logo.png" alt="Food Mart Grocery Store" /></a>
+  </div>
+
+  <main>
+    <h1>Your Shopping Cart</h1>
+    
+    <div class="cart-page-container">
+      <% if (cart && cart.items && cart.items.length > 0) { %>
+        <div class="cart-page-items">
+          <div class="cart-page-header">
+          
+            <div class="cart-page-product">Product</div>
+            <div class="cart-page-price">Price</div>
+            <div class="cart-page-quantity">Quantity</div>
+            <div class="cart-page-subtotal">Subtotal</div>
+            <div class="cart-page-actions">Actions</div>
+          </div>
+          
+          <% cart.items.forEach(item => { %>
+            <div class="cart-page-item" data-id="<%= item.id %>">
+              <div class="cart-page-product">
+                <img src="<%= item.image %>" alt="<%= item.name %>" />
+                <div class="cart-page-product-details">
+                  <h3><%= item.name %></h3>
+                  <p><%= item.unit %></p>
+                </div>
+              </div>
+              <div class="cart-page-price">$<%= item.price.toFixed(2) %></div>
+              <div class="cart-page-quantity">
+                <input type="number" class="cart-page-item-quantity" value="<%= item.quantity %>" min="1" max="1000" />
+              </div>
+              <div class="cart-page-subtotal item-subtotal">$<%= (item.price * item.quantity).toFixed(2) %></div>
+              <div class="cart-page-actions">
+                <button class="cart-page-remove-item" title="Remove item"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+        
+        <div class="cart-page-summary">
+          <div class="cart-page-total">
+            <div class="cart-page-total-label">Total:</div>
+            <div class="cart-page-total-amount">$<%= cart.total.toFixed(2) %></div>
+          </div>
+          
+          <div class="cart-page-buttons">
+            <button class="cart-page-clear">Clear Cart</button>
+            <button class="cart-page-checkout">Proceed to Checkout</button>
+          </div>
+          
+          <div class="cart-page-continue">
+            <a href="/">Continue Shopping</a>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="empty-cart-message">Your cart is empty.</div>
+        <div class="cart-actions">
+          <a href="/" class="continue-shopping">Continue Shopping</a>
+        </div>
+      <% } %>
+    </div>
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/cart.js"></script>
+</body>
+</html>

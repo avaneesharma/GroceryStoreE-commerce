@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Grocery Store - Food Mart</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/hero-banner.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main>
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h1><span class="hero-highlight">Fresh</span> Foods for your<br>Daily needs</h1>
+        <p class="hero-description">Browse our fresh and quality products by categories or search above!</p>
+        
+        <!-- hero-buttons -->
+      <div class="hero-buttons">
+        <a href="/fresh-produce" class="btn-green">Fresh</a>
+        <a href="#all-products" class="btn-dark">Browse All</a>
+        
+      </div>
+        
+        
+      </div>
+      
+      <div class="hero-features">
+        <div class="feature-box green-box">
+          <i class="fas fa-leaf"></i> 
+          <h3>Fresh from farm</h3>
+          <p>We source directly from local farms for the freshest produce.</p>
+        </div>
+        <div class="feature-box dark-box">
+          <i class="fas fa-sync-alt"></i>
+          <h3>Variety</h3>
+          <p> We have got meats, snacks, dairy, juices and daily essentials too.<p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="all-products" class="product-section">
+      <h2>All Products</h2>
+      <div class="item-grid">
+        <div class="grid">
+          <% if (items && items.length > 0) { %>
+            <% items.forEach(item => { %>
+              <div class="item-card" data-id="<%= item.id %>" data-category="<%= item.category %>">
+                <img src="<%= item.image %>" alt="<%= item.name %>" />
+                <h3><%= item.name %></h3>
+                <p>Unit: <%= item.unit %></p>
+                <p class="price">$<%= item.price.toFixed(2) %></p>
+                <% if (item.stock > 0) { %>
+                  <p class="in-stock">In Stock</p>
+                  <button>Add to Cart</button>
+                <% } else { %>
+                  <p class="out-of-stock">Out of Stock</p>
+                  <button class="disabled" disabled>Add to Cart</button>
+                <% } %>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <div class="no-products-message">
+              <p>No products available at the moment.</p>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

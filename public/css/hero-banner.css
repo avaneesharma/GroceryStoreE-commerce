@@ -1,0 +1,157 @@
+/* Hero Banner Styles */
+.hero-banner {
+    background-color: #ffda79;
+    padding: 60px 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+    background-image: url('/images/banner-bg.jpg');
+    background-size: cover;
+    background-position: right center;
+  }
+  
+  .hero-content {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding-right: 50%;
+  }
+  
+  .hero-banner h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  .hero-highlight {
+    color: #28a745;
+  }
+  
+  .hero-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+    max-width: 500px;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+  
+  .btn-green {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-green:hover {
+    background-color: #218838;
+  }
+  
+  .btn-dark {
+    background-color: #343a40;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-dark:hover {
+    background-color: #23272b;
+  }
+  
+  
+  
+  .hero-features {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    gap: 20px;
+  }
+  
+  .feature-box {
+    flex: 1;
+    padding: 25px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .feature-box i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .feature-box h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .feature-box p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  
+  .green-box {
+    background-color: #28a745;
+  }
+  
+  .dark-box {
+    background-color: #343a40;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .hero-content {
+      padding-right: 0;
+    }
+    
+    .hero-banner h1 {
+      font-size: 2.5rem;
+    }
+    
+    .stat-item h2 {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-banner {
+      padding: 40px 20px;
+      background-position: 70% center;
+    }
+    
+    .hero-content {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    .hero-stats {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .hero-features {
+      flex-direction: column;
+    }
+    
+    .hero-banner h1 {
+      font-size: 2rem;
+    }
+  }
